@@ -1,0 +1,718 @@
+1
+//syntax.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8080/J2EEProject/result.jsp">
+		Text Box: <input type="text" name="textBox"> <br/>
+		<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+
+//result.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%=request.getParameter("textBox") %><br/>
+</body>
+</html>
+
+
+
+2
+//syntax.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8080/J2EEProject/result.jsp">
+		Text Box: <input type="text" name="textBox"> <br/>
+		<input type="submit" value="OK">
+	</form>
+</body>
+</html>
+
+
+
+//result.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<% String s= request.getParameter("textBox");
+	out.println(s);
+	%>
+</body>
+</html>
+
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%! int j=0; %>
+	<% if(j==1){ %>
+	<%="You are visiting the page for: 1 time" %>
+	<%} %>
+	<% if(j==10){ %>
+	<%="You are visiting the page for: 10 time" %>
+	<%} %>
+</body>
+</html>
+
+
+
+package com.Pack;
+
+public class PerformTask {
+	public String doTask() {
+		return "hello world";
+	}
+}
+
+
+//result.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="com.cts.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<% PerformTask pt = new PerformTask();
+	out.println(pt.doTask());
+	%>
+</body>
+</html>
+
+
+
+5)
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%session.setAttribute("age",22); %>
+
+	<%= session.getAttribute("age") %>
+</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" session="false" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%session.setAttribute("age",22); %>
+	<%= session.getAttribute("age") %>
+</body>
+</html>
+
+
+
+6)
+//page.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" errorPage="error.jsp"  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%! int i=10; %>
+	<% int j=i/0; %>
+</body>
+</html>
+
+
+//error.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isErrorPage="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%= exception %> <br/>
+
+<%= exception.getMessage() %>
+
+</body>
+</html>
+
+
+7)
+//First1.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8086/J2EEProject/Second1.jsp">
+		Name: <input type="text" name="name"> <br/>
+		Age: <input type="text" name="age"> <br/>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+//Second1.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="com.cts.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= request.getParameter("name") %><br/>
+	<%
+	    int age= Integer.parseInt(request.getParameter("age"));
+		PerformTask pt = new PerformTask();
+		out.print(request.getParameter("age"));
+		out.print(" = ");
+		out.println(pt.convertLessThanOneThousand(age));
+	%>
+
+</body>
+</html>
+
+
+//PerformTask.java
+
+package com.cts;
+
+public class PerformTask {
+	private static final String[] tensNames = {
+	    "",
+	    " ten",
+	    " twenty",
+	    " thirty",
+	    " forty",
+	    " fifty",
+	    " sixty",
+	    " seventy",
+	    " eighty",
+	    " ninety"
+	  };
+
+		  private static final String[] numNames = {
+		    "",
+		    " one",
+		    " two",
+		    " three",
+		    " four",
+		    " five",
+		    " six",
+		    " seven",
+		    " eight",
+		    " nine",
+		    " ten",
+		    " eleven",
+		    " twelve",
+		    " thirteen",
+		    " fourteen",
+		    " fifteen",
+		    " sixteen",
+		    " seventeen",
+		    " eighteen",
+		    " nineteen"
+		  };
+
+	public String convertLessThanOneThousand(int number) {
+		 String soFar;
+
+		    if (number % 100 < 20){
+		      soFar = numNames[number % 100];
+		      number /= 100;
+		    }
+		    else {
+		      soFar = numNames[number % 10];
+		      number /= 10;
+
+		      soFar = tensNames[number % 10] + soFar;
+		      number /= 10;
+		    }
+		    if (number == 0) return soFar;
+		    return numNames[number] + " hundred" + soFar;
+	}
+}
+
+
+8)
+//Problem8a.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<% request.setAttribute("logoURL","https://lenskills.com"); %><br/>
+	<% request.setAttribute("organizationName","LenSkills"); %><br/>
+	<jsp:include page="Problem8b.jsp"></jsp:include>
+	<jsp:include page="Problem8c.jsp"></jsp:include>
+</body>
+</html>
+
+//Problem8b.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= request.getAttribute("logoURL") %>
+	<%= request.getAttribute("organizationName") %>
+</body>
+</html>
+
+
+//Problem8c.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= request.getAttribute("logoURL") %>
+	<%= request.getAttribute("organizationName") %>
+</body>
+</html>
+
+
+10)
+//Problem10a.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8086/J2EEProject/Problem10b.jsp">
+		Name: <input type="text" name="username"> <br/>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+
+//Problem10b.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= request.getParameter("username") %><br/>
+</body>
+</html>
+
+
+//Problem11a.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8086/J2EEProject/Problem11b.jsp">
+		Name: <input type="text" name="username"> <br/>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+//web.xml  
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>J2EEProject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+	<context-param>
+		<param-name>
+			Bhargava
+		</param-name>
+		<param-value>
+			22
+		</param-value>
+	</context-param>
+
+</web-app>
+
+//Problem11b.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<% String name = request.getParameter("username");
+	 if(name.equals("Bhargava")){
+	%>
+	<%= application.getInitParameter("Bhargava") %>
+	<% } %>
+	</body>
+</html>
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= application.getInitParameter("email") %>
+</body>
+</html>
+
+
+//Web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>J2EEProject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+	<context-param>
+		<param-name>
+			email
+		</param-name>
+		<param-value>
+			bhargava.makkena99@gmail.com
+		</param-value>
+	</context-param>
+
+</web-app>
+
+
+//Problem12.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= application.getInitParameter("email") %>
+</body>
+</html>
+
+
+//Web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>J2EEProject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+	<context-param>
+		<param-name>
+			email
+		</param-name>
+		<param-value>
+			bhargava.makkena99@gmail.com
+		</param-value>
+	</context-param>
+
+</web-app>
+
+
+
+//Problem13.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%= config.getInitParameter("department") %><br/>
+</body>
+</html>
+
+
+//web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>MyFirstEEProject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>Problem13</servlet-name>
+		<jsp-file>/Problem13.jsp</jsp-file>
+		<init-param>
+			<param-name>
+				department
+			</param-name>
+			<param-value>
+				CSE
+			</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+
+	   <servlet-name>Problem13</servlet-name>
+	   <url-pattern>/Problem13.jsp</url-pattern>
+
+	</servlet-mapping>
+</web-app>
+
+
+//Problem14a.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" errorPage="Problem14b.jsp"  %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<%! int i=10; %>
+	<% int j=i/0; %>
+</body>
+</html>
+
+//Problem14b.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isErrorPage="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%= exception %> <br/>
+
+<%= exception.getMessage() %>
+
+</body>
+</html>
+
+
+
+
+15)
+//Problem15a.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="http://localhost:8086/MyJ2EEProject/Problem15">
+		Name: <input type="text" name="username"> <br/>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+</html>
+
+//Problem15.java
+
+package com.pack;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Problem15
+ */
+@WebServlet("/Problem15")
+public class Problem15 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Problem15() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+
+        PrintWriter pw=response.getWriter();
+
+        //String name=request.getParameter("username");
+
+        RequestDispatcher rd = request.getRequestDispatcher("Problem15b.jsp");
+		rd.forward(request,response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+}
+
+
+//Problem15b.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	User Name: <%=  request.getParameter("username") %><br/>
+</body>
+</html>
+
+
+
+
+
